@@ -1,0 +1,15 @@
+# Make the workers services list
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: <NAME>
+  labels: <LABELS>
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector: <LABELS>

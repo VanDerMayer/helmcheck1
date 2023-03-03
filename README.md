@@ -1,1 +1,0 @@
-# helmcheck1

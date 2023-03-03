@@ -1,0 +1,9 @@
+common:
+  labels:
+    example.org/environment: dev
+    example.org/group: green
+
+workers:
+  - worker1
+  - worker2
+  - worker3
