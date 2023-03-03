@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image:
+          image: alpine
           ports:
             - name: http
               containerPort: 80
