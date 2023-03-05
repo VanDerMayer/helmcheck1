@@ -1,22 +1,35 @@
 # Make the workers list
-
+{{- $labels := .Values.common.labels }}
+{{- range $workers := .Values.workers }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <NAME>
+  name: app-deployment-{{ $workers }}
   labels:
+    {{ $workers }}
+    {{- range $key, $value := $labels }}
+    {{ $value }}
+    {{- end }}
 spec:
   selector:
-    matchLabels: <LABELS>
+    matchLabels:
+      {{ $workers }}
+      {{- range $key, $value := $labels }}
+      {{ $value }}
+      {{- end }}
   template:
     metadata:
-      labels: <LABELS>
+      labels:
+        {{ $workers }}
+        {{- range $key, $value := $labels }}
+        {{ $value }}
+        {{- end }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: some-name
           image: nginx
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-
+{{- end }}

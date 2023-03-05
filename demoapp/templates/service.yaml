@@ -1,10 +1,15 @@
 # Make the workers services list
-
+{{- $labels := .Values.common.labels }}
+{{- range $workers := .Values.workers }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: <NAME>
-  labels: <LABELS>
+  name: app-service-{{ $workers }}
+  labels:
+    {{ $workers }}
+    {{- range $key, $value := $labels }}
+    {{ $value }}
+    {{- end }}
 spec:
   type: ClusterIP
   ports:
@@ -12,4 +17,8 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-  selector: <LABELS>
+  selector:
+    {{- range $key, $value := $labels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+{{- end }}
